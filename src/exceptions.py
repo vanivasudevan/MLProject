@@ -1,6 +1,6 @@
 import sys
 import logging
-import logger
+from src.logger import logging
 def error_message_detail(error,error_detail:sys):
     _,_,exc_tb=error_detail.exc_info()
     file_name = exc_tb.tb_frame.f_code.co_filename
@@ -16,9 +16,11 @@ class CustomException(Exception):
     def __str(self):
         return self.error_message
     
-if __name__ =="__main__":
+    '''
+    if __name__ =="__main__":
     try:
         num = 10/0
     except Exception as e:
         logging.info("Divide by Zero Error")
         raise CustomException(e,sys)
+        '''
