@@ -9,6 +9,9 @@ from dataclasses import dataclass   # used to create class variable
 
 from src.components.data_transformation import DataTransformationConfig
 from src.components.data_transformation import DataTransformation
+
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 @dataclass  # can define the class varible directly without __init__
 class DataIngestionConfig:
     train_data_path: str=os.path.join('artifact','train.csv')
@@ -44,5 +47,6 @@ if __name__ == "__main__":
    obj = DataIngestion()
    train_data,test_data=obj.initiate_data_ingestion()
    data_trainsformation = DataTransformation()
-   data_trainsformation.initiate_data_transformation(train_data,test_data)
-        
+   train_arr,test_arr,_ = data_trainsformation.initiate_data_transformation(train_data,test_data)
+   modeltrainer=ModelTrainer()
+   print(modeltrainer.initiate_model_trainer(train_arr,test_arr)) 
