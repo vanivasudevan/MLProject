@@ -31,9 +31,10 @@ class DataTransformation:
                 ("imputer", SimpleImputer(strategy="median")),
                 ("scaler", StandardScaler())
             ])
-            
+        
             cat_pipeline = Pipeline(steps=[
-                ("one_hot_encoder", OneHotEncoder())
+            ("imputer", SimpleImputer(strategy="most_frequent")),  # Replace missing values with the most frequent category
+            ("one_hot_encoder", OneHotEncoder(handle_unknown="ignore"))  # Ignore unknown categories during transformation)
             ])
             
             logging.info(f"Numerical columns: {numerical_columns}")
